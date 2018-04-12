@@ -5,6 +5,7 @@
  */
 package javaapplication3;
 
+import javaapplication3.view.JFrame2;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;

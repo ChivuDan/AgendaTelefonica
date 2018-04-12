@@ -3,8 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication3;
+package javaapplication3.controller;
 
+import javaapplication3.view.EditButtonRenderer;
+import javaapplication3.controller.EditButtonEditor;
+import javaapplication3.view.DeleteButtonRenderer;
+import javaapplication3.controller.DeleteButtonEditor;
+import javaapplication3.controller.DataAccess;
+import javaapplication3.model.Abonat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TabelAfisat {
 
-    static Abonat filtru = new Abonat();
+    public static Abonat filtru = new Abonat();
 
     public static void afiseaza(JTable table, String colOrd, boolean isSortAsc) throws Exception {
         DataAccess deListat = new DataAccess();

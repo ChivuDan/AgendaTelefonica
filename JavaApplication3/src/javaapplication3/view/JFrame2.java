@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication3;
+package javaapplication3.view;
 
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javaapplication3.controller.SortingListener;
+import javaapplication3.controller.TabelAfisat;
 import javax.swing.JCheckBox;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -44,9 +46,8 @@ public class JFrame2 extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        
+
         TabelAfisat.afiseaza(jTable1, "id", true);
-        
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 

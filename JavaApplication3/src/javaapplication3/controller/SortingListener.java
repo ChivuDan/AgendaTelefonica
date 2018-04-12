@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication3;
+package javaapplication3.controller;
 
+import javaapplication3.controller.DataAccess;
+import javaapplication3.model.Abonat;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Collections;
@@ -23,7 +25,7 @@ import javax.swing.table.TableColumnModel;
  *
  * @author Chivu
  */
-class SortingListener extends MouseAdapter {
+public class SortingListener extends MouseAdapter {
 
     protected JTable table;
     static public Boolean isSortAsc = true;

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication3;
+package javaapplication3.controller;
 
+import javaapplication3.controller.DataAccess;
+import javaapplication3.model.Abonat;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
