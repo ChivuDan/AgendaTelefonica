@@ -44,10 +44,8 @@ public class JFrame2 extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-
-    
         
-        TabelAfisat.afiseaza(jTable1, "id", true, null);
+        TabelAfisat.afiseaza(jTable1, "id", true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 

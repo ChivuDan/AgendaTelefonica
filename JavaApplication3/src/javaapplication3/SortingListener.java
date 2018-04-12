@@ -75,7 +75,7 @@ class SortingListener extends MouseAdapter {
             this.colOrd = colOrd;
             String sql = null;
 
-            TabelAfisat.afiseaza(table, colOrd, isSortAsc, null);
+            TabelAfisat.afiseaza(table, colOrd, isSortAsc);
             
         } catch (Exception ex) {
             Logger.getLogger(SortingListener.class.getName()).log(Level.SEVERE, null, ex);

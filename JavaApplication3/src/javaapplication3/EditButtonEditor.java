@@ -80,7 +80,7 @@ public class EditButtonEditor extends DefaultCellEditor {
         try {
             dataAccessVariable.insertAbonat(transmitator);
             
-            TabelAfisat.afiseaza(table, SortingListener.colOrd, SortingListener.isSortAsc, null);
+            TabelAfisat.afiseaza(table, SortingListener.colOrd, SortingListener.isSortAsc);
         } catch (Exception ex) {
             Logger.getLogger(EditButtonEditor.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -99,7 +99,7 @@ public class EditButtonEditor extends DefaultCellEditor {
         transmitator.setCNP(dt.getValueAt(row, 5).toString());
 
         dataAccessVariable.updateAbonat(transmitator);
-        TabelAfisat.afiseaza(table, SortingListener.colOrd, SortingListener.isSortAsc, null);
+        TabelAfisat.afiseaza(table, SortingListener.colOrd, SortingListener.isSortAsc);
      
        // updateAbonat();
 

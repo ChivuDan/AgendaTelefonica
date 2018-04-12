@@ -84,30 +84,14 @@ public class DeleteButtonEditor extends DefaultCellEditor {
 
         DefaultTableModel dt = ((DefaultTableModel) this.table.getModel());
 
-        Map<String, String> filter = new HashMap<>();
-        Object id = dt.getValueAt(row, 0);
-        Object nume = dt.getValueAt(row, 1);
-        Object prenume = dt.getValueAt(row, 2);
-        Object nrTel = dt.getValueAt(row, 3);
-        Object cnp = dt.getValueAt(row, 5);
-        if (id != null) {
-            filter.put("id", id.toString());
-        }
-        if (nume != null) {
-            filter.put("nume", nume.toString());
-        }
+        Abonat filtru = TabelAfisat.filtru;
+        filtru.setId((Integer) dt.getValueAt(row, 0));
+        filtru.setNume((String) dt.getValueAt(row, 1));
+        filtru.setPrenume((String) dt.getValueAt(row, 2));
+        filtru.setNrTel((String) dt.getValueAt(row, 3));
+        filtru.setCNP((String) dt.getValueAt(row, 5));
 
-        if (prenume != null) {
-            filter.put("prenume", prenume.toString());
-        }
-
-        if (cnp != null) {
-            filter.put("cnp", cnp.toString());
-        }
-        if (nrTel != null) {
-            filter.put("\"nrTel\"", nrTel.toString());
-        }
-        TabelAfisat.afiseaza(table, SortingListener.colOrd, SortingListener.isSortAsc, filter);
+        TabelAfisat.afiseaza(table, SortingListener.colOrd, SortingListener.isSortAsc);
     }
 
     public Object getCellEditorValue() {
