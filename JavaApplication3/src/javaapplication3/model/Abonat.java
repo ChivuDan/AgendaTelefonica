@@ -42,7 +42,6 @@ public class Abonat {
         this.id = id;
     }
     
-
     public String getNume() {
         return nume;
     }

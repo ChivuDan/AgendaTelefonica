@@ -9,7 +9,6 @@ import javaapplication3.view.EditButtonRenderer;
 import javaapplication3.controller.EditButtonEditor;
 import javaapplication3.view.DeleteButtonRenderer;
 import javaapplication3.controller.DeleteButtonEditor;
-import javaapplication3.controller.DataAccess;
 import javaapplication3.model.Abonat;
 import java.util.HashMap;
 import java.util.List;

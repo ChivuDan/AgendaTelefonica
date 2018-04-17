@@ -5,7 +5,6 @@
  */
 package javaapplication3.controller;
 
-import javaapplication3.controller.DataAccess;
 import javaapplication3.model.Abonat;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -87,7 +86,7 @@ public class EditButtonEditor extends DefaultCellEditor {
             Logger.getLogger(EditButtonEditor.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-       // JOptionPane.showMessageDialog(button, " am adaugat ceva");
+       JOptionPane.showMessageDialog(button, " am adaugat ceva");
     }
 
     private void edit() throws Exception {

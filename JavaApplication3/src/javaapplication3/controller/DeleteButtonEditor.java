@@ -5,7 +5,6 @@
  */
 package javaapplication3.controller;
 
-import javaapplication3.controller.DataAccess;
 import javaapplication3.model.Abonat;
 import java.awt.Component;
 import java.awt.event.ActionEvent;

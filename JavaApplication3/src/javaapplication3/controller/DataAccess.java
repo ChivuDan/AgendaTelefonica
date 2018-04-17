@@ -49,10 +49,79 @@ public class DataAccess {
                 + "	WHERE id='" + date.getId() + "';");
 
     }
-    public List<Abonat> selectAbonat1(String colOrd, boolean isAsc, Abonat aport) throws Exception {
-       
-        return null;
-    }
+//
+//    public List<Abonat> selectAbonat1(String colOrd, boolean isAsc, Abonat aport) throws Exception {
+// Connection con = null;
+//        Statement sta = null;
+//        ResultSet rs = null;
+//
+//        try {
+//            String getQuery = "SELECT id, nume, prenume, \"nrTel\", cnp\n"
+//                    + "	FROM public.\"Abonat\"";
+//
+//            con = getConnection();
+//            sta = con.createStatement();
+////    private Integer id;
+////    private String nume;
+////    private String prenume;
+////    private String CNP;
+////    private String nrTel;
+////    private String tipNumar;
+//            if (aport != null) {
+//                getQuery = getQuery + " WHERE";
+//                while (aport.id != null) {
+//                    Map.Entry mentry = (Map.Entry) iterator.next();
+//                    getQuery = getQuery + " " + " CAST (" + mentry.getKey().toString() + " AS TEXT) LIKE  '%" + mentry.getValue().toString() + "%' ";
+//                    if (iterator.hasNext()) {
+//                        getQuery = getQuery + " AND ";
+//                    }
+//
+//                    //  AND numeVariabila LIKE CAST( numeVariabila AS TEXT);
+//                }
+//            }
+//            if (colOrd != null && !colOrd.equals("")) {
+//                getQuery += " ORDER BY " + colOrd + " "
+//                        + (isAsc ? "ASC" : "DESC");
+//            }
+//            rs = sta.executeQuery(getQuery);
+////            if (sql != null) {
+////               rs = sta.executeQuery(("SELECT id, nume, prenume, \"nrTel\", cnp\n"
+////                     + "WHERE nume LIKE 'a%' AND prenume LIKE '%'" + "	FROM public.\"Abonat\"" + " ORDER BY " + colOrd + " " + new String(isAsc ? "ASC" : "DESC") + ";"));
+////            } else {
+////            rs = sta.executeQuery(("SELECT id, nume, prenume, \"nrTel\", cnp\n"
+////                    + "	FROM public.\"Abonat\"" + " ORDER BY " + colOrd + " " + new String(isAsc ? "ASC" : "DESC") + ";"));
+////        };
+//
+//            List<Abonat> selectati = new ArrayList<Abonat>();
+//
+//            while (rs.next()) {
+//                Abonat selectat = new Abonat();
+//                selectat.setId(rs.getInt("id"));
+//                selectat.setNume(rs.getString("nume"));
+//                selectat.setPrenume(rs.getString("prenume"));
+//                selectat.setNrTel(rs.getString("nrTel"));
+//                selectat.setCNP(rs.getString("cnp"));
+//                selectati.add(selectat);
+//            }
+//
+//            return selectati;
+//        } catch (Exception e) {
+//            System.out.println("A crapat:" + e.getMessage());
+//            throw e;
+//        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (con != null) {
+//                con.close();
+//            }
+//            if (sta != null) {
+//                sta.close();
+//            }
+//
+//        }
+//    }
+
     public List<Abonat> selectAbonat(String colOrd, boolean isAsc, Map<String, String> filter) throws Exception {
         // sql = null; --> daca primeste parametrii necesari sa ruleze celalalt string sql u WHERE 
         Connection con = null;
@@ -62,10 +131,7 @@ public class DataAccess {
         try {
             String getQuery = "SELECT id, nume, prenume, \"nrTel\", cnp\n"
                     + "	FROM public.\"Abonat\"";
-            
-            
-           
-            
+
             con = getConnection();
             sta = con.createStatement();
 
@@ -79,13 +145,13 @@ public class DataAccess {
                     if (iterator.hasNext()) {
                         getQuery = getQuery + " AND ";
                     }
-                    
+
                     //  AND numeVariabila LIKE CAST( numeVariabila AS TEXT);
                 }
             }
-            if(colOrd != null && !colOrd.equals("")){
-                getQuery += " ORDER BY " + colOrd + " "+
-                        (isAsc? "ASC": "DESC");
+            if (colOrd != null && !colOrd.equals("")) {
+                getQuery += " ORDER BY " + colOrd + " "
+                        + (isAsc ? "ASC" : "DESC");
             }
             rs = sta.executeQuery(getQuery);
 //            if (sql != null) {
