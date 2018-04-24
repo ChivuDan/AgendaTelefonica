@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javaapplication3.util.Constants;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -82,14 +83,20 @@ public class DeleteButtonEditor extends DefaultCellEditor {
     }
 
     private void filter() throws Exception {
-
-        DefaultTableModel dt = ((DefaultTableModel) this.table.getModel());
-
         Abonat filtru = TabelAfisat.filtru;
-        filtru.setId((Integer) dt.getValueAt(row, 0));
+        DefaultTableModel dt = ((DefaultTableModel) this.table.getModel());
+        Object id = dt.getValueAt(row, 0);
+        if (id != null && Constants.isNumeric(id.toString())) {
+            filtru.setId(Integer.parseInt(dt.getValueAt(row, 0).toString()));
+        }
+        else {
+            filtru.setId(null);
+        }
+
         filtru.setNume((String) dt.getValueAt(row, 1));
         filtru.setPrenume((String) dt.getValueAt(row, 2));
         filtru.setNrTel((String) dt.getValueAt(row, 3));
+        filtru.setTipNumar((String) dt.getValueAt(row, 4));
         filtru.setCNP((String) dt.getValueAt(row, 5));
 
         TabelAfisat.afiseaza(table, SortingListener.colOrd, SortingListener.isSortAsc);

@@ -58,8 +58,8 @@ public class SortingListener extends MouseAdapter {
                 case 3:
                     colOrd = "\"nrTel\"";
                     break;
-                //case 4: lista = deListat.selectAbonat("tipAbonat", true);
-                //   break;
+                case 4:colOrd= "\"tipAbonat\"" ;
+                   break;
                 case 5:
                     colOrd = "cnp";
                     break;

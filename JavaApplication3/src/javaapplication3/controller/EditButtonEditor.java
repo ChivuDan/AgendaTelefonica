@@ -77,35 +77,46 @@ public class EditButtonEditor extends DefaultCellEditor {
         transmitator.setNrTel(dt.getValueAt(row, 3).toString());
         transmitator.setTipNumar(dt.getValueAt(row, 4).toString());
         transmitator.setCNP(dt.getValueAt(row, 5).toString());
-        
+
         try {
             dataAccessVariable.insertAbonat(transmitator);
-            
+
             TabelAfisat.afiseaza(table, SortingListener.colOrd, SortingListener.isSortAsc);
         } catch (Exception ex) {
             Logger.getLogger(EditButtonEditor.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-       JOptionPane.showMessageDialog(button, " am adaugat ceva");
+        JOptionPane.showMessageDialog(button, " am adaugat ceva");
     }
 
     private void edit() throws Exception {
         Abonat transmitator = new Abonat();
         DefaultTableModel dt = ((DefaultTableModel) this.table.getModel());
-        transmitator.setId(Integer.parseInt(dt.getValueAt(row, 0).toString()));
-        transmitator.setNume(dt.getValueAt(row, 1).toString());
-        transmitator.setPrenume(dt.getValueAt(row, 2).toString());
-        transmitator.setNrTel(dt.getValueAt(row, 3).toString());
-        transmitator.setTipNumar(dt.getValueAt(row, 4).toString());
-        transmitator.setCNP(dt.getValueAt(row, 5).toString());
+        if (validare()) {
 
-        dataAccessVariable.updateAbonat(transmitator);
-        TabelAfisat.afiseaza(table, SortingListener.colOrd, SortingListener.isSortAsc);
-     
-       // updateAbonat();
+            transmitator.setId(Integer.parseInt(dt.getValueAt(row, 0).toString()));
+            transmitator.setNume(dt.getValueAt(row, 1).toString());
+            transmitator.setPrenume(dt.getValueAt(row, 2).toString());
+            transmitator.setNrTel(dt.getValueAt(row, 3).toString());
+            transmitator.setTipNumar(dt.getValueAt(row, 4).toString());
+            transmitator.setCNP(dt.getValueAt(row, 5).toString());
 
-       // JOptionPane.showMessageDialog(button, " am modificat ceva");
+            dataAccessVariable.updateAbonat(transmitator);
+            TabelAfisat.afiseaza(table, SortingListener.colOrd, SortingListener.isSortAsc);
+        }
+        // updateAbonat();
+        // JOptionPane.showMessageDialog(button, " am modificat ceva");
+    }
 
+    private Boolean validare() {
+        DefaultTableModel dt = ((DefaultTableModel) this.table.getModel());
+        Object id = dt.getValueAt(row, 0);
+        if (id == null || id.toString().length() == 0) {
+            JOptionPane.showMessageDialog(button, "id-ul e null");
+            return false;
+        }
+
+        return true;
     }
 
     public Object getCellEditorValue() {

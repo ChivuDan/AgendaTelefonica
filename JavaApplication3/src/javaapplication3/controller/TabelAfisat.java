@@ -5,6 +5,7 @@
  */
 package javaapplication3.controller;
 
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import javaapplication3.view.EditButtonRenderer;
 import javaapplication3.controller.EditButtonEditor;
 import javaapplication3.view.DeleteButtonRenderer;
@@ -33,7 +34,7 @@ public class TabelAfisat {
         List<Abonat> lista = deListat.selectAbonat(colOrd, isSortAsc, filter);
 
         Object[][] tabel = new Object[lista.size() + 1][];
-        if (lista.size() == 0) {
+        if (lista.isEmpty()) {
             tabel = new Object[1][];
         }
         tabel[0] = new Object[7];
@@ -46,6 +47,7 @@ public class TabelAfisat {
             tabel[i][3] = row.getNrTel();
             tabel[i][4] = row.getTipNumar();
             tabel[i][5] = row.getCNP();
+
         }
 
         tabel[0][0] = filtru.getId() != null ? String.valueOf(filtru.getId()) : null;
@@ -54,13 +56,22 @@ public class TabelAfisat {
         tabel[0][3] = filtru.getNrTel();
         tabel[0][4] = filtru.getTipNumar();
         tabel[0][5] = filtru.getCNP();
+   
+ 
 
         DefaultTableModel dt = new javax.swing.table.DefaultTableModel(
                 tabel,
                 new String[]{
                     "ID", "Nume", "Prenume", "Numar Telefon", "Tip Abonat", "CNP", "x", "y"
                 }
-        );
+        ){ @Override 
+    public boolean isCellEditable(int row, int column)
+    {
+        
+            return !(column==0 && row > 0);
+           
+        // add your code here
+    }};
 
         table.setModel(dt);
         table.getColumn("x").setCellRenderer(new DeleteButtonRenderer());
@@ -91,6 +102,9 @@ public class TabelAfisat {
 
         if (filtru.getCNP() != null) {
             filter.put("cnp", filtru.getCNP());
+        }
+        if (filtru.getTipNumar() != null){
+            filter.put("Tip Abonat", filtru.getTipNumar());
         }
 
         if (filtru.getNrTel() != null) {

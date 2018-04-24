@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javaapplication3.controller.SortingListener;
 import javaapplication3.controller.TabelAfisat;
+import javaapplication3.util.Constants;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -65,15 +66,18 @@ public class JFrame2 extends javax.swing.JFrame {
         jMenu1.setText("File");
 
         openMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        openMenuItem.setEnabled(false);
         openMenuItem.setText("Open");
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openAction(evt);
             }
         });
+
         jMenu1.add(openMenuItem);
 
         saveMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        saveMenuItem.setEnabled(false);
         saveMenuItem.setText("Save");
         saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +114,7 @@ public class JFrame2 extends javax.swing.JFrame {
         aboutMenuItem.setText("About");
         aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               aboutAction(evt);
+                aboutAction(evt);
             }
         });
         jMenu2.add(aboutMenuItem);
@@ -193,7 +197,16 @@ public class JFrame2 extends javax.swing.JFrame {
     }
 
     private void registerAction(ActionEvent evt) {
-        System.out.println("register");
+        String codAcces = JOptionPane.showInputDialog(this, "Introdu codul de inregistrare");
+        System.out.println(codAcces);
+        if (Constants.KEYS.contains(codAcces)) {
+            openMenuItem.setEnabled(true);
+            saveMenuItem.setEnabled(true);
+            JOptionPane.showMessageDialog(this, "Ai acces!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Ai gresit codu', băiatu' meu!");
+        }
+
         //primeste codul, activeaza butoanele save si open
     }
 
@@ -202,8 +215,23 @@ public class JFrame2 extends javax.swing.JFrame {
     }
 
     private void exitAction(java.awt.event.ActionEvent evt) {
-        System.exit(0);
+        Object[] options = {"Da, va rog!",
+            "Nu, m-am razgandit!",};
+        int n = JOptionPane.showOptionDialog(jTable1,
+                "Vrei sa inchizi aplicatia "
+                + "la care am trudit?",
+                "Mesaj de confirmare",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+        if (n == 0) {
+            System.exit(0);
+
+        }
     }
+    //System.exit(0);
 
     private void saveAction(java.awt.event.ActionEvent evt) {
         System.out.println("Save");
@@ -211,16 +239,16 @@ public class JFrame2 extends javax.swing.JFrame {
     }
 
     private void openAction(java.awt.event.ActionEvent evt) {
-       JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "JPG & GIF Images", "jpg", "gif");
         chooser.setFileFilter(filter);
         int returnVal = chooser.showOpenDialog(this);
-        if(returnVal == JFileChooser.APPROVE_OPTION) {
-            System.out.println("You chose to open this file: " +
-                    chooser.getSelectedFile().getName());
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            System.out.println("You chose to open this file: "
+                    + chooser.getSelectedFile().getName());
             //sa incarce ce-i in fisier si sa duca in baza de date
-            
+
         }
     }
 

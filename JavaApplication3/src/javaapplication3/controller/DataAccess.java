@@ -32,9 +32,18 @@ public class DataAccess {
     //  }
     public void insertAbonat(Abonat date) throws Exception {
         updateDB("INSERT INTO public.\"Abonat\"(\n"
-                + "	 nume, prenume, \"nrTel\", cnp)\n"
-                + "	VALUES ('" + date.getNume() + "','" + date.getPrenume() + "', '" + date.getNrTel() + "',"
-                + " '" + date.getCNP() + "');");
+                + "	 nume, prenume, \"nrTel\", cnp, \"tipAbonat\")\n"
+                + "	VALUES ('" 
+                + date.getNume() 
+                + "','" 
+                + date.getPrenume() 
+                + "', '" 
+                + date.getNrTel()
+                + "',"
+                + " '" + date.getCNP() 
+                + "', '" 
+                +  date.getTipNumar() 
+                + "');");
     }
 
     public void deleteAbonat(Integer id) throws Exception {
@@ -45,7 +54,12 @@ public class DataAccess {
     public void updateAbonat(Abonat date) throws Exception {
 
         updateDB("UPDATE public.\"Abonat\"\n"
-                + "	SET  nume='" + date.getNume() + "', prenume='" + date.getPrenume() + "', \"nrTel\"='" + date.getNrTel() + "', cnp='" + date.getCNP() + "'\n"
+                + "	SET  nume='" + date.getNume()
+                + "', prenume='" + date.getPrenume() + "', "
+                + "\"nrTel\"='" + date.getNrTel() 
+                + "', cnp='" + date.getCNP() + "', "
+                + "\"tipAbonat\"='" + date.getTipNumar()
+                + "'\n"
                 + "	WHERE id='" + date.getId() + "';");
 
     }
@@ -129,7 +143,7 @@ public class DataAccess {
         ResultSet rs = null;
 
         try {
-            String getQuery = "SELECT id, nume, prenume, \"nrTel\", cnp\n"
+            String getQuery = "SELECT id, nume, prenume, \"nrTel\", cnp, \"tipAbonat\"\n"
                     + "	FROM public.\"Abonat\"";
 
             con = getConnection();
@@ -171,6 +185,7 @@ public class DataAccess {
                 selectat.setPrenume(rs.getString("prenume"));
                 selectat.setNrTel(rs.getString("nrTel"));
                 selectat.setCNP(rs.getString("cnp"));
+                selectat.setTipNumar(rs.getString("tipAbonat"));
                 selectati.add(selectat);
             }
 
