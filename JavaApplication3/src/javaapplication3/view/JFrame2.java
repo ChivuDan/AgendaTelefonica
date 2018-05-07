@@ -7,9 +7,14 @@ package javaapplication3.view;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javaapplication3.controller.SaveAction;
 import javaapplication3.controller.SortingListener;
 import javaapplication3.controller.TabelAfisat;
 import javaapplication3.util.Constants;
@@ -50,9 +55,11 @@ public class JFrame2 extends javax.swing.JFrame {
 
     private void initComponents() throws Exception {
 
+        reclamaPanel = new javax.swing.JPanel();
+        reclamaScrollPane = new javax.swing.JScrollPane();
+        textAreaReclama = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -123,15 +130,15 @@ public class JFrame2 extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 400, Short.MAX_VALUE)
+        javax.swing.GroupLayout reclamaPanelLayout = new javax.swing.GroupLayout(reclamaPanel);
+        reclamaPanel.setLayout(reclamaPanelLayout);
+        reclamaPanelLayout.setHorizontalGroup(
+                reclamaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 766, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 276, Short.MAX_VALUE)
+        reclamaPanelLayout.setVerticalGroup(
+                reclamaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 112, Short.MAX_VALUE)
         );
 
         TabelAfisat.afiseaza(jTable1, "id", true);
@@ -145,6 +152,11 @@ public class JFrame2 extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jTable1);
 
+        textAreaReclama.setColumns(20);
+        textAreaReclama.setRows(5);
+        textAreaReclama.setText("reclama\n");
+        reclamaScrollPane.setViewportView(textAreaReclama);
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -153,16 +165,21 @@ public class JFrame2 extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+                        .addComponent(reclamaScrollPane)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(reclamaScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
+        timerReclame();
         pack();
         // </editor-fold>                        
     }
@@ -194,6 +211,27 @@ public class JFrame2 extends javax.swing.JFrame {
                 }
             }
         });
+    }
+
+    private void timerReclame() {
+        ArrayList<String> places = new ArrayList<String>();
+        places.add("Buenos Aires");
+        places.add("Córdoba");
+        places.add("La Plata");
+        Timer timer = new Timer();
+        Random r = new Random();
+        textAreaReclama.setText(places.get(0));
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                String inMana = textAreaReclama.getText();
+                places.remove(places.indexOf(inMana));
+                textAreaReclama.setText(places.get(r.nextInt(1)));
+                places.add(inMana);
+            }
+
+        };
+        timer.schedule(timerTask, 0, 5000);
     }
 
     private void registerAction(ActionEvent evt) {
@@ -234,7 +272,8 @@ public class JFrame2 extends javax.swing.JFrame {
     //System.exit(0);
 
     private void saveAction(java.awt.event.ActionEvent evt) {
-        System.out.println("Save");
+        SaveAction export = new SaveAction();
+        export.exportToCSV(jTable1, "C:\\CSV\\a.csv");
         //pastreaza modificarile facute si le trimite in baza de date--> save to file
     }
 
@@ -265,5 +304,8 @@ public class JFrame2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPanel reclamaPanel;
+    private javax.swing.JScrollPane reclamaScrollPane;
+    private javax.swing.JTextArea textAreaReclama;
     // End of variables declaration                   
 }
