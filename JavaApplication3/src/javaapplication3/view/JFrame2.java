@@ -18,8 +18,10 @@ import javaapplication3.controller.SaveAction;
 import javaapplication3.controller.SortingListener;
 import javaapplication3.controller.TabelAfisat;
 import javaapplication3.util.Constants;
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -212,7 +214,14 @@ public class JFrame2 extends javax.swing.JFrame {
             }
         });
     }
-
+    public void ExImage()
+    {
+    ImageIcon imageIcon = new ImageIcon("C:\\Users\\Chivu\\Desktop\\alligator1.jpg");
+    JLabel label = new JLabel(imageIcon);
+    add(label);
+    label.setVisible(true);
+    }
+    
     private void timerReclame() {
         ArrayList<String> places = new ArrayList<String>();
         places.add("Buenos Aires");
@@ -224,6 +233,7 @@ public class JFrame2 extends javax.swing.JFrame {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
+                ExImage();
                 String inMana = textAreaReclama.getText();
                 places.remove(places.indexOf(inMana));
                 textAreaReclama.setText(places.get(r.nextInt(1)));
